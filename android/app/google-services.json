@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "447698123893",
+    "project_id": "nascon-prep",
+    "storage_bucket": "nascon-prep.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447698123893:android:b19aadecc84e0fef970c3c",
+        "android_client_info": {
+          "package_name": "com.example.nascon_prep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5F_4YkpGzsKyHFeKFuygCQJbHze7OTNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
