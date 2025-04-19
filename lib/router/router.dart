@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nascon_prep/router/routes.dart';
 import 'package:nascon_prep/screens/chat/chat.dart';
 import 'package:nascon_prep/screens/chatbox/chatbox.dart';
+import 'package:nascon_prep/screens/task/task.dart';
 
 final Map<String, Widget Function(dynamic)> appRoutes = {
   AppRoutes.chat: (_) => const ChatScreen(),
   AppRoutes.chatbox: (_) => const ChatboxScreen(),
+  AppRoutes.task: (_) => const TaskScreen(),
 };
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
@@ -14,6 +16,8 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
       return FadeRoute(settings: settings, child: const ChatScreen());
     case AppRoutes.chatbox:
       return FadeRoute(settings: settings, child: const ChatboxScreen());
+    case AppRoutes.task:
+      return FadeRoute(settings: settings, child: const TaskScreen());
 
     default:
       return null;

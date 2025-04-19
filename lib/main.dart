@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nascon_prep/router/router.dart';
 import 'package:nascon_prep/router/routes.dart';
 import 'package:nascon_prep/screens/chat/chat.dart';
+import 'package:nascon_prep/screens/task/task.dart';
 
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
@@ -34,10 +35,10 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ChatScreen(),
+      home: TaskScreen(),
       onGenerateRoute: onGenerateRoutes,
       routes: appRoutes,
-      initialRoute: AppRoutes.chatbox,
+      initialRoute: AppRoutes.task,
     );
   }
 }
