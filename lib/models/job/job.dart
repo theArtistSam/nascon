@@ -12,4 +12,16 @@ class Job {
       name: name ?? this.name,
     );
   }
+
+  factory Job.fromJson(Map<String, dynamic> json) {
+    return Job(
+      id: json['id'] as String,
+      members: List<String>.from(json['members'] as List),
+      name: json['name'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'id': id, 'members': members, 'name': name};
+  }
 }

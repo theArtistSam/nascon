@@ -1,27 +1,24 @@
 import 'package:nascon_prep/models/job/job.dart';
 
 class Task extends Job {
-  @override
-  final String id;
   final String projectId;
-  final String name;
-  final List<String> members;
   final DateTime startDate;
   final DateTime endDate;
   final int label;
   final String description;
 
   Task({
-    required this.id,
-    required this.name,
+    required super.id,
+    required super.name,
     required this.projectId,
-    required this.members,
+    required super.members,
     required this.startDate,
     required this.endDate,
     this.label = 0,
     required this.description,
-  }) : super(id: id, members: members, name: name);
+  });
 
+  @override
   Task copyWith({
     String? id,
     String? name,
@@ -42,5 +39,32 @@ class Task extends Job {
       label: label ?? this.label,
       description: description ?? this.description,
     );
+  }
+
+  factory Task.fromJson(Map<String, dynamic> json) {
+    return Task(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      projectId: json['projectId'] as String,
+      members: List<String>.from(json['members'] as List),
+      startDate: DateTime.parse(json['startDate'] as String),
+      endDate: DateTime.parse(json['endDate'] as String),
+      label: json['label'] as int? ?? 0,
+      description: json['description'] as String,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'projectId': projectId,
+      'members': members,
+      'startDate': startDate.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
+      'label': label,
+      'description': description,
+    };
   }
 }
