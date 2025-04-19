@@ -4,20 +4,24 @@ import 'package:nascon_prep/configs/configs.dart';
 
 class AppTextfield extends StatelessWidget {
   final String hintText;
-  const AppTextfield({super.key, required this.hintText});
+  final isPrefix;
+  const AppTextfield({super.key, required this.hintText, this.isPrefix = true});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (value) {},
       decoration: InputDecoration(
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(
-            left: 17,
-            right: 16,
-          ), // Adjust spacing here
-          child: Icon(Iconsax.search_normal),
-        ),
+        prefixIcon:
+            isPrefix
+                ? Padding(
+                  padding: const EdgeInsets.only(
+                    left: 17,
+                    right: 16,
+                  ), // Adjust spacing here
+                  child: Icon(Iconsax.search_normal),
+                )
+                : null,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 27,
           vertical: 18,

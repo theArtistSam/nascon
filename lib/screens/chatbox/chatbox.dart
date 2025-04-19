@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:nascon_prep/configs/configs.dart';
 import 'package:nascon_prep/static/static.dart';
 import 'package:nascon_prep/widgets/core/app_appbar.dart';
+import 'package:nascon_prep/widgets/core/app_icon_button.dart';
+import 'package:nascon_prep/widgets/core/app_textfield.dart';
 import 'package:provider/provider.dart';
 part 'widgets/_body.dart';
 part '_state.dart';
+part './widgets/_message_tile.dart';
 
 class ChatboxScreen extends StatelessWidget {
   const ChatboxScreen({super.key});
