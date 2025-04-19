@@ -13,7 +13,7 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppAppbar(title: 'Add member'),
+      appBar: AppAppbar(title: 'Add member', isBack: true),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

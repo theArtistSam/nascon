@@ -4,6 +4,7 @@ import 'package:nascon_prep/screens/calendar/calendar.dart';
 import 'package:nascon_prep/screens/chat/chat.dart';
 import 'package:nascon_prep/screens/chatbox/chatbox.dart';
 import 'package:nascon_prep/screens/search/search.dart';
+import 'package:nascon_prep/screens/setting_one/setting_one.dart';
 import 'package:nascon_prep/screens/task/task.dart';
 import 'package:nascon_prep/screens/project/project.dart';
 
@@ -14,6 +15,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
   AppRoutes.project: (_) => const ProjectScreen(),
   AppRoutes.calender: (_) => const CalendarScreen(),
   AppRoutes.search: (_) => const SearchScreen(),
+  AppRoutes.settingOne: (_) => const SettingOneScreen(),
 };
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
@@ -30,6 +32,8 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
       return FadeRoute(settings: settings, child: const CalendarScreen());
     case AppRoutes.search:
       return FadeRoute(settings: settings, child: const SearchScreen());
+    case AppRoutes.settingOne:
+      return FadeRoute(settings: settings, child: const SettingOneScreen());
 
     default:
       return null;

@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
       home: TaskScreen(),
       onGenerateRoute: onGenerateRoutes,
       routes: appRoutes,
-      initialRoute: AppRoutes.search,
+      initialRoute: AppRoutes.settingOne,
     );
   }
 }
