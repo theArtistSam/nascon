@@ -7,12 +7,14 @@ class AppIconButton extends StatelessWidget {
   final double radius;
   final IconData icon;
   final Color color;
+  final Color iconColor;
   const AppIconButton({
     super.key,
     this.onTap,
     this.radius = 40,
     this.icon = Iconsax.add,
     this.color = AppTheme.purple,
+    this.iconColor = AppTheme.background,
   });
 
   @override
@@ -27,7 +29,7 @@ class AppIconButton extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(100),
         ),
-        child: Icon(icon, color: AppTheme.background),
+        child: Icon(icon, color: iconColor),
       ),
     );
   }
