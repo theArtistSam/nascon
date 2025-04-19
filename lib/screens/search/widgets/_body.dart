@@ -58,8 +58,10 @@ class _BodyState extends State<_Body> {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(data[index].name),
-                          subtitle: Text(data[index].email),
+                          subtitle: Text(data[index].id),
                           onTap: () {
+                            from = data[index].id;
+                            AppRoutes.chatbox.push(context);
                             setState(() {
                               selected++;
                             });
