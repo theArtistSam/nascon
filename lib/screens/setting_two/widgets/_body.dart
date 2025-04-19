@@ -32,22 +32,34 @@ class _Body extends StatelessWidget {
               'name',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             ),
-            const AppTextfield(hintText: 'Tien Tom'),
+            AppTextfield(
+              hintText: 'Tien Tom',
+              controller: TextEditingController(),
+            ),
             const Text(
               'Email',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             ),
-            const AppTextfield(hintText: 'TienTom@gmail.com'),
+            AppTextfield(
+              hintText: 'TienTom@gmail.com',
+              controller: TextEditingController(),
+            ),
             const Text(
               'Phone number',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             ),
-            const AppTextfield(hintText: '0300-000000'),
+            AppTextfield(
+              hintText: '0300-000000',
+              controller: TextEditingController(),
+            ),
             const Text(
               'Password',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             ),
-            const AppTextfield(hintText: 'Change Password'),
+            AppTextfield(
+              hintText: 'Change Password',
+              controller: TextEditingController(),
+            ),
             TextButton(
               onPressed: () {},
 

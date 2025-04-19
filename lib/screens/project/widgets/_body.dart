@@ -37,7 +37,10 @@ class _BodyState extends State<_Body> {
         padding: EdgeInsets.all(15.0),
         child: ListView(
           children: [
-            AppTextfield(hintText: 'Search'),
+            AppTextfield(
+              hintText: 'Search',
+              controller: TextEditingController(),
+            ),
 
             SizedBox(
               height: 90,

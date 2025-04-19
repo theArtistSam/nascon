@@ -5,11 +5,18 @@ import 'package:nascon_prep/configs/configs.dart';
 class AppTextfield extends StatelessWidget {
   final String hintText;
   final isPrefix;
-  const AppTextfield({super.key, required this.hintText, this.isPrefix = true});
+  final TextEditingController controller;
+  const AppTextfield({
+    super.key,
+    required this.hintText,
+    this.isPrefix = true,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       onChanged: (value) {},
       decoration: InputDecoration(
         prefixIcon:
