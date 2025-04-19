@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nascon_prep/firebase_options.dart';
+import 'package:nascon_prep/widgets/core/bottom_navigation_bar.dart';
 
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: navigatorKey,
         navigatorObservers: [...observers, NavigationHistoryObserver()],
         title: 'Flutter Demo',
+        home: MainHomeScreen(),
 
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
