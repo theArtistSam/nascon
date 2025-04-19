@@ -1,11 +1,34 @@
 part of '../chat.dart';
 
-class _Body extends StatelessWidget {
+class _Body extends StatefulWidget {
   const _Body();
+
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FetchUsers().putUsers();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppAppbar(title: 'Chat'),
+      appBar: AppBar(
+        title: Text('Chat'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.draw),
+            onPressed: () {
+              // AppRoutes.search.push(context);
+            },
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(

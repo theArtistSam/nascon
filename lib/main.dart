@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
         home: TaskScreen(),
         onGenerateRoute: onGenerateRoutes,
         routes: appRoutes,
-        initialRoute: AppRoutes.settingTwo,
+        initialRoute: AppRoutes.chat,
       ),
     );
   }
