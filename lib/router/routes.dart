@@ -6,4 +6,5 @@ abstract class AppRoutes {
   static const calender = '/calender';
   static const search = '/search';
   static const settingOne = '/setting_one';
+  static const settingTwo = '/setting_twoe';
 }
