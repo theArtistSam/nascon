@@ -42,7 +42,13 @@ class _ProjectTile extends StatelessWidget {
                 ),
               ],
             ),
-            Text("Date Created", style: TextStyle(color: AppTheme.textGrey)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Start Date", style: TextStyle(color: AppTheme.textGrey)),
+                Text("End Date", style: TextStyle(color: AppTheme.textGrey)),
+              ],
+            ),
             Row(
               children: [
                 Text("50%"),
