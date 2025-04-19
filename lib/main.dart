@@ -38,7 +38,11 @@ class _MyAppState extends State<MyApp> {
       home: TaskScreen(),
       onGenerateRoute: onGenerateRoutes,
       routes: appRoutes,
+<<<<<<< HEAD
       initialRoute: AppRoutes.task,
+=======
+      initialRoute: AppRoutes.project,
+>>>>>>> fcd5dab9288a410fc792e0d0de84330061d43a8d
     );
   }
 }
