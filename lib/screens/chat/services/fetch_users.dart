@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:nascon_prep/models/user/user.dart';
 
 class FetchUsers {
+  final database = FirebaseFirestore.instance;
   void getAllUsers() {
-    final database = FirebaseFirestore.instance;
     database
         .collection('users')
         .get()
@@ -70,5 +70,26 @@ class FetchUsers {
             debugPrint("Error adding user: $error");
           });
     }
+  }
+
+  Future<List<User>> getUsers() async {
+    List<User> hehe = [];
+
+    database
+        .collection('users')
+        .get()
+        .then((onValue) {
+          for (var doc in onValue.docs) {
+            final user = User.fromJson(doc.data());
+            debugPrint('User fetched: ${user.name}');
+            hehe.add(user);
+          }
+          return hehe;
+        })
+        .catchError((error) {
+          debugPrint("Error fetching users: $error");
+          return hehe;
+        });
+    return hehe;
   }
 }

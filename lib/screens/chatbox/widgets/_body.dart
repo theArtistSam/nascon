@@ -1,7 +1,22 @@
 part of '../chatbox.dart';
 
-class _Body extends StatelessWidget {
-  const _Body();
+final currid = '2uo79zX41UF9wM3KN9FK';
+
+class _Body extends StatefulWidget {
+  final String to;
+  final String from;
+  const _Body({required this.to, required this.from});
+
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,21 +70,53 @@ class _Body extends StatelessWidget {
               ),
             ),
             Divider(color: AppTheme.textGrey),
-            ListView.separated(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                if (index % 2 == 0) {
-                  return _MessageTile(text: 'Some Text Message');
-                }
-                return _MessageTile(text: 'Some Text Message', isOther: true);
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 10);
-              },
-              itemCount: 5,
+            const SizedBox(height: 20),
+            Expanded(
+              child: StreamBuilder(
+                stream:
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .where(widget.to, isEqualTo: currid)
+                        .snapshots(),
+                builder: (ctx, snp) {
+                  if (snp.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snp.hasError) {
+                    return Center(child: Text('Error: ${snp.error}'));
+                  }
+                  if (snp.hasData) {
+                    final data =
+                        snp.data!.docs.map((doc) => doc.data()).toList();
+                    return ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return _MessageTile(
+                          text: data[index]['message'],
+                          isOther: data[index]['sender'] == widget.to,
+                        );
+                      },
+                    );
+                  }
+                  return Center(child: Text('No data found'));
+                },
+              ),
             ),
+            // ListView.separated(
+            //   padding: EdgeInsets.symmetric(vertical: 20),
+            //   shrinkWrap: true,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   itemBuilder: (context, index) {
+            //     if (index % 2 == 0) {
+            //       return _MessageTile(text: 'Some Text Message');
+            //     }
+            //     return _MessageTile(text: 'Some Text Message', isOther: true);
+            //   },
+            //   separatorBuilder: (context, index) {
+            //     return SizedBox(height: 10);
+            //   },
+            //   itemCount: 5,
+            // ),
           ],
         ),
       ),

@@ -10,9 +10,9 @@ class _Body extends StatefulWidget {
 class _BodyState extends State<_Body> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    FetchUsers().putUsers();
+    // FetchUsers().putUsers();
+    // AppRoutes.search.push(context);
   }
 
   @override
@@ -24,7 +24,7 @@ class _BodyState extends State<_Body> {
           IconButton(
             icon: Icon(Icons.draw),
             onPressed: () {
-              // AppRoutes.search.push(context);
+              AppRoutes.search.push(context);
             },
           ),
         ],

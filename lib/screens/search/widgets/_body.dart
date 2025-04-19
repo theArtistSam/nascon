@@ -9,6 +9,21 @@ class _Body extends StatefulWidget {
 
 class _BodyState extends State<_Body> {
   int selected = 0;
+  List<User> users = [];
+  void wait() async {
+    try {
+      users = await FetchUsers().getUsers();
+    } catch (e) {
+      log('Error fetching users: $e');
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    wait();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,49 +38,37 @@ class _BodyState extends State<_Body> {
             SizedBox(height: 20),
             Text('Selected ($selected)'),
             Expanded(
-              child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (cxt, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Container(
-                      height: 80,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.black),
-                      ),
-                      child: Row(
-                        spacing: 20,
-                        children: [
-                          SizedBox(width: 7),
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Colors.grey,
-                            child: Icon(Icons.person, size: 40),
-                          ),
-                          Column(
-                            spacing: 6,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Name $index',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'Email $index',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+              child: StreamBuilder(
+                stream:
+                    FirebaseFirestore.instance.collection('users').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+                  if (snapshot.hasData) {
+                    final data =
+                        snapshot.data!.docs
+                            .map((doc) => User.fromJson(doc.data()))
+                            .toList();
+                    return ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(data[index].name),
+                          subtitle: Text(data[index].email),
+                          onTap: () {
+                            setState(() {
+                              selected++;
+                            });
+                          },
+                        );
+                      },
+                    );
+                  }
+                  return Center(child: Text('No data found'));
                 },
               ),
             ),
