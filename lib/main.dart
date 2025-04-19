@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nascon_prep/router/router.dart';
 import 'package:nascon_prep/router/routes.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -21,17 +24,19 @@ class _MyAppState extends State<MyApp> {
   final List<NavigatorObserver> observers = [];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowMaterialGrid: false,
-      navigatorKey: navigatorKey,
-      navigatorObservers: [...observers, NavigationHistoryObserver()],
-      title: 'Flutter Demo',
-      initialRoute: AppRoutes.home,
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: onGenerateRoutes,
-      routes: appRoutes,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: [],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        navigatorKey: navigatorKey,
+        navigatorObservers: [...observers, NavigationHistoryObserver()],
+        title: 'Flutter Demo',
+        routes: appRoutes,
+        initialRoute: AppRoutes.splash,
+        onGenerateRoute: onGenerateRoutes,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-part of 'home.dart';
+part of 'splash.dart';
 
 class _ScreenState extends ChangeNotifier {
   static _ScreenState s(BuildContext context, [listen = false]) =>

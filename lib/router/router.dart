@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nascon_prep/router/routes.dart';
-import 'package:nascon_prep/screens/home/home.dart';
+import 'package:nascon_prep/screens/splash/splash.dart';
 // @inject:import
 
 final Map<String, Widget Function(dynamic)> appRoutes = {
-  AppRoutes.home: (_) => const HomeScreen(),
-  // @inject:router-map
+  AppRoutes.splash: (_) => const SplashScreen(),
 };
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
-    case AppRoutes.home:
-      return FadeRoute(settings: settings, child: const HomeScreen());
+    case AppRoutes.splash:
+      return FadeRoute(settings: settings, child: const SplashScreen());
     // @inject:router-case
     default:
       return null;
