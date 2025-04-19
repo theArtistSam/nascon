@@ -1,7 +1,3 @@
----
-to: lib/blocs/<%= lower %>/bloc.dart
----
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -11,11 +7,11 @@ part 'state.dart';
 part 'states/_test.dart';
 part 'data_provider.dart'; // Added reference to data_provider.dart
 
-class <%= proper %>Bloc extends Bloc<<%= proper %>Event, <%= proper %>State> {
-  final <%= proper %>Provider _provider = <%= proper %>Provider();
+class ChatBloc extends Bloc<ChatEvent, ChatState> {
+  final ChatProvider _provider = ChatProvider();
 
-  <%= proper %>Bloc() : super(const <%= proper %>Initial()) {
-    on<<%= proper %>Event>((event, emit) {
+  ChatBloc() : super(const ChatInitial()) {
+    on<ChatEvent>((event, emit) {
       // TODO: implement event handler
     });
   }
