@@ -24,4 +24,21 @@ class Chat {
       text: text ?? this.text,
     );
   }
+
+  factory Chat.fromJson(Map<String, dynamic> json) {
+    return Chat(
+      id: json['id'] as String,
+      senderId: json['senderId'] as String,
+      dateTime: DateTime.parse(json['dateTime'] as String),
+      text: json['text'] as String,
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'senderId': senderId,
+      'dateTime': dateTime.toIso8601String(),
+      'text': text,
+    };
+  }
 }
