@@ -27,10 +27,7 @@ class _BodyState extends State<_Body> {
                   controller: ModalScrollController.of(context),
                   child: ChangeNotifierProvider.value(
                     value: modalProvider,
-                    child: ModalSheet(
-                      title: 'Create Task',
-                      projects: ['sdf', 'fdf'],
-                    ),
+                    child: ModalSheet(title: 'Create Project'),
                   ),
                 ),
           );

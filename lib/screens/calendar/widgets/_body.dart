@@ -3,7 +3,7 @@ part of '../calendar.dart';
 // SPDX-License-Identifier: Apache-2.0
 
 class TableRangeExample extends StatefulWidget {
-  const TableRangeExample({super.key});
+  TableRangeExample({super.key});
 
   @override
   State<TableRangeExample> createState() => _TableRangeExampleState();
@@ -21,6 +21,8 @@ class _TableRangeExampleState extends State<TableRangeExample> {
 
   @override
   Widget build(BuildContext context) {
+    final modalProvider = ModalProvider.s(context, true);
+
     return Scaffold(
       appBar: AppBar(title: const Text('TableCalendar - Range')),
       body: Column(
@@ -71,7 +73,9 @@ class _TableRangeExampleState extends State<TableRangeExample> {
                 _rangeStart != null
                     ? Center(
                       child: Text(
-                        'Start Date: ${_rangeStart!.day.toString()} / ${_rangeStart!.month.toString()} / ${_rangeStart!.year.toString()}',
+                        _rangeStart == null
+                            ? "Start Date"
+                            : Datetime.format(_rangeStart!),
                       ),
                     )
                     : Text(''),
@@ -81,10 +85,27 @@ class _TableRangeExampleState extends State<TableRangeExample> {
                 _rangeEnd != null
                     ? Center(
                       child: Text(
-                        'End Date:  ${_rangeEnd!.day.toString()} / ${_rangeEnd!.month.toString()} / ${_rangeEnd!.year.toString()}',
+                        _rangeEnd == null
+                            ? "Start Date"
+                            : Datetime.format(_rangeEnd!),
                       ),
                     )
                     : Text(''),
+          ),
+
+          const SizedBox(height: 200),
+          AppButton(
+            text: 'Confirm Schedule',
+            onTap: () {
+              if (_rangeEnd == null || _rangeStart == null) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('Please Select Date')));
+              } else {
+                modalProvider.setRange(_rangeStart!, _rangeEnd!);
+                ''.pop(context);
+              }
+            },
           ),
         ],
       ),

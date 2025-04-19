@@ -8,6 +8,8 @@ class ModalProvider extends ChangeNotifier {
   List<String>? items;
   int selectedIndex = 0;
   String? selectedValue;
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
 
   void selectDropdown(String value) {
     selectedValue = value;
@@ -16,6 +18,12 @@ class ModalProvider extends ChangeNotifier {
 
   void selectLabel(int index) {
     selectedIndex = index;
+    notifyListeners();
+  }
+
+  void setRange(DateTime rangeStart, DateTime rangeEnd) {
+    this.rangeStart = rangeStart;
+    this.rangeEnd = rangeEnd;
     notifyListeners();
   }
 }

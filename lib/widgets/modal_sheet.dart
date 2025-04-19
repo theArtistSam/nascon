@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:nascon_prep/configs/configs.dart';
 import 'package:nascon_prep/providers/modal_provider.dart';
 import 'package:nascon_prep/static/static.dart';
+import 'package:nascon_prep/utils/datetime.dart';
 import 'package:nascon_prep/widgets/core/app_button.dart';
 import 'package:nascon_prep/widgets/core/app_icon_button.dart';
 import 'package:nascon_prep/widgets/core/app_textfield.dart';
@@ -103,9 +104,20 @@ class _ModalSheetState extends State<ModalSheet> {
               ],
             ),
             const SizedBox(height: 20),
-            Text(
-              "Date and Time",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Date and Time",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  onPressed: () {
+                    '/calender'.push(context);
+                  },
+                  icon: Icon(Iconsax.calendar),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             Row(
@@ -113,11 +125,25 @@ class _ModalSheetState extends State<ModalSheet> {
               children: [
                 Row(
                   spacing: 10,
-                  children: [Icon(Iconsax.calendar), Text("Start Date")],
+                  children: [
+                    Icon(Iconsax.calendar),
+                    Text(
+                      modalProvider.rangeStart != null
+                          ? Datetime.format(modalProvider.rangeStart!)
+                          : 'Start Date',
+                    ),
+                  ],
                 ),
                 Row(
                   spacing: 10,
-                  children: [Icon(Iconsax.calendar), Text("End Date")],
+                  children: [
+                    Icon(Iconsax.calendar),
+                    Text(
+                      modalProvider.rangeEnd != null
+                          ? Datetime.format(modalProvider.rangeEnd!)
+                          : 'End Date',
+                    ),
+                  ],
                 ),
               ],
             ),
