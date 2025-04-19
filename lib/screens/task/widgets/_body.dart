@@ -22,7 +22,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppAppbar(title: 'Task'),
+      appBar: AppAppbar(title: 'Task', isBack: true, isTrailing: true),
 
       body: Padding(
         padding: const EdgeInsets.all(15),

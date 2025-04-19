@@ -6,6 +6,7 @@ import 'package:nascon_prep/screens/chatbox/chatbox.dart';
 import 'package:nascon_prep/screens/search/search.dart';
 import 'package:nascon_prep/screens/setting_one/setting_one.dart';
 import 'package:nascon_prep/screens/setting_two/setting_two.dart';
+import 'package:nascon_prep/screens/dashboard/dashboard.dart';
 import 'package:nascon_prep/screens/task/task.dart';
 import 'package:nascon_prep/screens/project/project.dart';
 
@@ -18,6 +19,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
   AppRoutes.search: (_) => const SearchScreen(),
   AppRoutes.settingOne: (_) => const SettingOneScreen(),
   AppRoutes.settingTwo: (_) => const SettingTwoScreen(),
+  AppRoutes.dashboard: (_) => const DashboardScreen(),
 };
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
@@ -38,6 +40,8 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
       return FadeRoute(settings: settings, child: const SettingOneScreen());
     case AppRoutes.settingTwo:
       return FadeRoute(settings: settings, child: const SettingTwoScreen());
+    case AppRoutes.dashboard:
+      return FadeRoute(settings: settings, child: const DashboardScreen());
 
     default:
       return null;

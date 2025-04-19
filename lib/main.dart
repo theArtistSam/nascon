@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:nascon_prep/providers/modal_provider.dart';
 import 'package:nascon_prep/router/router.dart';
 import 'package:nascon_prep/router/routes.dart';
 import 'package:nascon_prep/screens/chat/chat.dart';
@@ -27,18 +28,25 @@ class _MyAppState extends State<MyApp> {
   final List<NavigatorObserver> observers = [];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      navigatorObservers: [...observers, NavigationHistoryObserver()],
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ModalProvider>(
+          create: (context) => ModalProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        navigatorKey: navigatorKey,
+        navigatorObservers: [...observers, NavigationHistoryObserver()],
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: TaskScreen(),
+        onGenerateRoute: onGenerateRoutes,
+        routes: appRoutes,
+        initialRoute: AppRoutes.settingTwo,
       ),
-      home: TaskScreen(),
-      onGenerateRoute: onGenerateRoutes,
-      routes: appRoutes,
-      initialRoute: AppRoutes.settingTwo,
     );
   }
 }

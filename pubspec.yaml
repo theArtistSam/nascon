@@ -47,6 +47,7 @@ dependencies:
   cloud_firestore: ^5.6.6
   iconsax: ^0.0.8
   table_calendar: ^3.2.0
+  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_test:
