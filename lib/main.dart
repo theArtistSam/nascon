@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nascon_prep/firebase_options.dart';
-import 'package:nascon_prep/widgets/core/bottom_navigation_bar.dart';
+import 'package:nascon_prep/router/router.dart';
+import 'package:nascon_prep/router/routes.dart';
+import 'package:nascon_prep/screens/chat/chat.dart';
 
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
@@ -25,19 +26,18 @@ class _MyAppState extends State<MyApp> {
   final List<NavigatorObserver> observers = [];
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: navigatorKey,
-        navigatorObservers: [...observers, NavigationHistoryObserver()],
-        title: 'Flutter Demo',
-        home: MainHomeScreen(),
-
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
+      navigatorObservers: [...observers, NavigationHistoryObserver()],
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      home: ChatScreen(),
+      onGenerateRoute: onGenerateRoutes,
+      routes: appRoutes,
+      initialRoute: AppRoutes.chat,
     );
   }
 }
