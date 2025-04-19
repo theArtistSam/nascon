@@ -5,7 +5,9 @@ import 'package:nascon_prep/blocs/job/bloc.dart';
 import 'package:nascon_prep/providers/modal_provider.dart';
 import 'package:nascon_prep/router/router.dart';
 import 'package:nascon_prep/router/routes.dart';
+import 'package:nascon_prep/screens/dashboard/dashboard.dart';
 import 'package:nascon_prep/screens/task/task.dart';
+import 'package:nascon_prep/screens/test.dart';
 
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: TaskScreen(),
+        home: DashboardScreen(),
         onGenerateRoute: onGenerateRoutes,
         routes: appRoutes,
         initialRoute: AppRoutes.dashboard,

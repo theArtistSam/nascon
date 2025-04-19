@@ -9,6 +9,13 @@ class _Body extends StatefulWidget {
 
 class _BodyState extends State<_Body> {
   @override
+  void initState() {
+    super.initState();
+    // Trigger FetchProjects event when the screen is loaded
+    BlocProvider.of<JobBloc>(context).add(FetchProjects());
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenState = _ScreenState.s(context, true);
 
@@ -29,7 +36,40 @@ class _BodyState extends State<_Body> {
           );
         },
       ),
-      body: Center(child: Text('Dashboard Screen')),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: BlocBuilder<JobBloc, JobState>(
+          builder: (context, state) {
+            if (state.project is ProjectStateLoading) {
+              // Display loading indicator while fetching data
+              return Center(child: CircularProgressIndicator());
+            } else if (state.project is ProjectStateSuccess) {
+              return ListView.separated(
+                itemCount: state.projects!.length,
+                itemBuilder: (context, index) {
+                  final project = state.projects![index];
+                  return ProjectTile(
+                    project: project,
+                  ); // Pass project data to your tile widget
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 10);
+                },
+              );
+            } else if (state.project is ProjectStateFailure) {
+              // Display error message if there's an error fetching data
+              return Center(
+                child: Text(
+                  'Failed to load projects: ${state.project!.message}',
+                ),
+              );
+            } else {
+              return SizedBox.shrink();
+              // Return empty container if state is unhandled
+            }
+          },
+        ),
+      ),
     );
   }
 }

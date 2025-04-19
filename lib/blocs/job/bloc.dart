@@ -152,7 +152,28 @@ class JobBloc extends Bloc<JobEvent, JobState> {
   //  Fetch Method
   FutureOr<void> _fetchEvents(FetchEvents event, Emitter<JobState> emit) {}
 
-  FutureOr<void> _fetchProjects(FetchProjects event, Emitter<JobState> emit) {}
+  FutureOr<void> _fetchProjects(
+    FetchProjects event,
+    Emitter<JobState> emit,
+  ) async {
+    // Emit loading state
+    emit(state.copyWith(project: ProjectStateLoading()));
+
+    try {
+      // Use the userId from the event, not an undefined variable
+      final projects = await _provider.fetchProjects(userId: userId);
+
+      // Emit the success state with updated projects
+      emit(state.copyWith(projects: projects, project: ProjectStateSuccess()));
+    } catch (e) {
+      // Emit failure state with error message
+      emit(
+        state.copyWith(
+          project: ProjectStateFailure(message: 'Failed to fetch projects: $e'),
+        ),
+      );
+    }
+  }
 
   FutureOr<void> _fetchTeams(FetchTeams event, Emitter<JobState> emit) {}
 

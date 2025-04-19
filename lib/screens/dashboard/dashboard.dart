@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:nascon_prep/blocs/job/bloc.dart';
 import 'package:nascon_prep/configs/configs.dart';
 import 'package:nascon_prep/widgets/core/app_appbar.dart';
+import 'package:nascon_prep/widgets/project_tile.dart';
 import 'package:provider/provider.dart';
 part 'widgets/_body.dart';
 part '_state.dart';

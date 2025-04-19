@@ -13,6 +13,13 @@ class _BodyState extends State<_Body> {
     final screenState = _ScreenState.s(context, true);
     final modalProvider = Provider.of<ModalProvider>(context);
 
+    @override
+    void initState() {
+      super.initState();
+      // Trigger FetchProjects event when the screen is loaded
+      BlocProvider.of<JobBloc>(context).add(FetchProjects());
+    }
+
     return Scaffold(
       appBar: AppAppbar(
         title: 'Project',
@@ -62,16 +69,36 @@ class _BodyState extends State<_Body> {
               ),
             ),
 
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return _ProjectTile();
+            BlocBuilder<JobBloc, JobState>(
+              builder: (context, state) {
+                if (state.project is ProjectStateLoading) {
+                  // Display loading indicator while fetching data
+                  return Center(child: CircularProgressIndicator());
+                } else if (state.project is ProjectStateSuccess) {
+                  return ListView.separated(
+                    itemCount: state.projects!.length,
+                    itemBuilder: (context, index) {
+                      final project = state.projects![index];
+                      return ProjectTile(
+                        project: project,
+                      ); // Pass project data to your tile widget
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 10);
+                    },
+                  );
+                } else if (state.project is ProjectStateFailure) {
+                  // Display error message if there's an error fetching data
+                  return Center(
+                    child: Text(
+                      'Failed to load projects: ${state.project!.message}',
+                    ),
+                  );
+                } else {
+                  return SizedBox.shrink();
+                  // Return empty container if state is unhandled
+                }
               },
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 10);
-              },
-              itemCount: 5,
             ),
           ],
         ),

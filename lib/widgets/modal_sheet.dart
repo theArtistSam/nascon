@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -215,7 +216,8 @@ class _ModalSheetState extends State<ModalSheet> {
             AppButton(
               text: 'Create',
               onTap: () {
-                print("HEREHRERE");
+                final List<String>? projects = widget.projects;
+
                 final name = modalProvider.nameController.text.trim();
                 final description =
                     modalProvider.descriptionController.text.trim();
@@ -231,18 +233,32 @@ class _ModalSheetState extends State<ModalSheet> {
                   );
                   return;
                 }
+                if (projects == null) {
+                  BlocProvider.of<JobBloc>(context).add(
+                    CreateProject(
+                      name: name,
+                      members: [], // Replace with actual member list
+                      label: modalProvider.selectedIndex,
+                      startDate: startDate,
+                      endDate: endDate,
+                      description: description,
+                    ),
+                  );
+                } else {
+                  BlocProvider.of<JobBloc>(context).add(
+                    CreateTask(
+                      name: name,
+                      projectId: 'project1', // Replace with actual project ID
+                      members: [], // Replace with actual member list
+                      label: modalProvider.selectedIndex,
+                      startDate: startDate,
+                      endDate: endDate,
+                      description: description,
+                    ),
+                  );
+                }
 
-                BlocProvider.of<JobBloc>(context).add(
-                  CreateTask(
-                    name: name,
-                    projectId: 'projectId', // Replace with actual project ID
-                    members: [], // Replace with actual member list
-                    label: modalProvider.selectedIndex,
-                    startDate: startDate,
-                    endDate: endDate,
-                    description: description,
-                  ),
-                );
+                ''.pop(context);
               },
             ),
           ],
