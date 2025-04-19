@@ -43,6 +43,7 @@ dependencies:
   cloudinary_url_gen: ^1.0.0
   image_picker: ^1.1.2
   cloudinary: ^1.2.0
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:
