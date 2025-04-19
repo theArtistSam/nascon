@@ -21,8 +21,31 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final modalProvider = Provider.of<ModalProvider>(context);
     return Scaffold(
-      appBar: AppAppbar(title: 'Task', isBack: true, isTrailing: true),
+      appBar: AppAppbar(
+        title: 'Task',
+        isBack: true,
+        isTrailing: true,
+        onTap: () {
+          showMaterialModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder:
+                (context) => SingleChildScrollView(
+                  controller: ModalScrollController.of(context),
+                  child: ChangeNotifierProvider.value(
+                    value: modalProvider,
+                    child: ModalSheet(
+                      title: 'Create Task',
+                      // TODO: Provide a list of projects here
+                      projects: ['p1', 'p2'],
+                    ),
+                  ),
+                ),
+          );
+        },
+      ),
 
       body: Padding(
         padding: const EdgeInsets.all(15),
