@@ -4,4 +4,5 @@ abstract class AppRoutes {
   static const task = '/task';
   static const project = '/project';
   static const calender = '/calender';
+  static const search = '/search';
 }
