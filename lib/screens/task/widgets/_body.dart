@@ -52,7 +52,10 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppTextfield(hintText: 'Search'),
+            AppTextfield(
+              hintText: 'Search',
+              controller: TextEditingController(),
+            ),
             SizedBox(
               height: 90,
               child: ListView.separated(

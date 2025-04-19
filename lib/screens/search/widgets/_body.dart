@@ -19,7 +19,10 @@ class _BodyState extends State<_Body> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppTextfield(hintText: 'Search'),
+            AppTextfield(
+              hintText: 'Search',
+              controller: TextEditingController(),
+            ),
             SizedBox(height: 20),
             Text('Selected ($selected)'),
             Expanded(

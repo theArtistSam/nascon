@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:nascon_prep/blocs/job/bloc.dart';
 import 'package:nascon_prep/configs/configs.dart';
 import 'package:nascon_prep/providers/modal_provider.dart';
 import 'package:nascon_prep/static/static.dart';
@@ -190,13 +192,59 @@ class _ModalSheetState extends State<ModalSheet> {
             const SizedBox(height: 20),
 
             Text(
+              "name",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            AppTextfield(
+              hintText: 'Name...',
+              isPrefix: false,
+              controller: modalProvider.nameController,
+            ),
+            Text(
               "Add Description",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            AppTextfield(hintText: 'Add a description', isPrefix: false),
+            AppTextfield(
+              hintText: 'Add a description',
+              isPrefix: false,
+              controller: modalProvider.descriptionController,
+            ),
             const Spacer(),
-            AppButton(text: 'Create'),
+            AppButton(
+              text: 'Create',
+              onTap: () {
+                print("HEREHRERE");
+                final name = modalProvider.nameController.text.trim();
+                final description =
+                    modalProvider.descriptionController.text.trim();
+                final startDate = modalProvider.rangeStart;
+                final endDate = modalProvider.rangeEnd;
+
+                if (name.isEmpty ||
+                    description.isEmpty ||
+                    startDate == null ||
+                    endDate == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Please fill all required fields.')),
+                  );
+                  return;
+                }
+
+                BlocProvider.of<JobBloc>(context).add(
+                  CreateTask(
+                    name: name,
+                    projectId: 'projectId', // Replace with actual project ID
+                    members: [], // Replace with actual member list
+                    label: modalProvider.selectedIndex,
+                    startDate: startDate,
+                    endDate: endDate,
+                    description: description,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

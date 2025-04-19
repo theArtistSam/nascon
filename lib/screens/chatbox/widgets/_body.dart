@@ -82,6 +82,7 @@ class _Body extends StatelessWidget {
             children: [
               Expanded(
                 child: AppTextfield(
+                  controller: TextEditingController(),
                   isPrefix: false,
                   hintText: 'Write a Message',
                 ),

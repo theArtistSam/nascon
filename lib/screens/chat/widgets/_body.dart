@@ -35,7 +35,10 @@ class _BodyState extends State<_Body> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: AppTextfield(hintText: 'Search...'),
+              child: AppTextfield(
+                hintText: 'Search...',
+                controller: TextEditingController(),
+              ),
             ),
             ListView.separated(
               padding: EdgeInsets.symmetric(vertical: 20),

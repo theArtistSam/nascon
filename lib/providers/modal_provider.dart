@@ -10,6 +10,8 @@ class ModalProvider extends ChangeNotifier {
   String? selectedValue;
   DateTime? rangeStart;
   DateTime? rangeEnd;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   void selectDropdown(String value) {
     selectedValue = value;
