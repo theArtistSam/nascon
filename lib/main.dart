@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       home: ChatScreen(),
       onGenerateRoute: onGenerateRoutes,
       routes: appRoutes,
-      initialRoute: AppRoutes.chatbox,
+      initialRoute: AppRoutes.project,
     );
   }
 }
