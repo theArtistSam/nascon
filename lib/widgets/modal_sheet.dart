@@ -253,6 +253,7 @@ class _ModalSheetState extends State<ModalSheet> {
                       label: modalProvider.selectedIndex,
                       startDate: startDate,
                       endDate: endDate,
+
                       description: description,
                     ),
                   );

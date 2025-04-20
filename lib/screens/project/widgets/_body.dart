@@ -9,16 +9,16 @@ class _Body extends StatefulWidget {
 
 class _BodyState extends State<_Body> {
   @override
+  void initState() {
+    super.initState();
+    // Trigger FetchProjects event when the screen is loaded
+    BlocProvider.of<JobBloc>(context).add(FetchProjects());
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenState = _ScreenState.s(context, true);
     final modalProvider = Provider.of<ModalProvider>(context);
-
-    @override
-    void initState() {
-      super.initState();
-      // Trigger FetchProjects event when the screen is loaded
-      BlocProvider.of<JobBloc>(context).add(FetchProjects());
-    }
 
     return Scaffold(
       appBar: AppAppbar(
@@ -76,6 +76,8 @@ class _BodyState extends State<_Body> {
                   return Center(child: CircularProgressIndicator());
                 } else if (state.project is ProjectStateSuccess) {
                   return ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: state.projects!.length,
                     itemBuilder: (context, index) {
                       final project = state.projects![index];

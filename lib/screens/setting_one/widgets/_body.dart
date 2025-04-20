@@ -42,15 +42,18 @@ class _Body extends StatelessWidget {
                 ),
 
                 Spacer(),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    'Edit',
-                    style: TextStyle(color: Colors.black, fontSize: 16),
+                GestureDetector(
+                  onTap: () => AppRoutes.settingTwo.push(context),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      'Edit',
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
                   ),
                 ),
               ],

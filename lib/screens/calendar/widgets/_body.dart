@@ -25,89 +25,94 @@ class _TableRangeExampleState extends State<TableRangeExample> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('TableCalendar - Range')),
-      body: Column(
-        children: [
-          TableCalendar(
-            firstDay: kFirstDay,
-            lastDay: kLastDay,
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            rangeStartDay: _rangeStart,
-            rangeEndDay: _rangeEnd,
-            calendarFormat: _calendarFormat,
-            rangeSelectionMode: _rangeSelectionMode,
-            onDaySelected: (selectedDay, focusedDay) {
-              if (!isSameDay(_selectedDay, selectedDay)) {
-                setState(() {
-                  _selectedDay = selectedDay;
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              TableCalendar(
+                firstDay: kFirstDay,
+                lastDay: kLastDay,
+                focusedDay: _focusedDay,
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                rangeStartDay: _rangeStart,
+                rangeEndDay: _rangeEnd,
+                calendarFormat: _calendarFormat,
+                rangeSelectionMode: _rangeSelectionMode,
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                      _rangeStart = null; // Important to clean those
+                      _rangeEnd = null;
+                      _rangeSelectionMode = RangeSelectionMode.toggledOff;
+                    });
+                  }
+                },
+                onRangeSelected: (start, end, focusedDay) {
+                  setState(() {
+                    _selectedDay = null;
+                    _focusedDay = focusedDay;
+                    _rangeStart = start;
+                    _rangeEnd = end;
+                    _rangeSelectionMode = RangeSelectionMode.toggledOn;
+                  });
+                },
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
                   _focusedDay = focusedDay;
-                  _rangeStart = null; // Important to clean those
-                  _rangeEnd = null;
-                  _rangeSelectionMode = RangeSelectionMode.toggledOff;
-                });
-              }
-            },
-            onRangeSelected: (start, end, focusedDay) {
-              setState(() {
-                _selectedDay = null;
-                _focusedDay = focusedDay;
-                _rangeStart = start;
-                _rangeEnd = end;
-                _rangeSelectionMode = RangeSelectionMode.toggledOn;
-              });
-            },
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
-          ),
-          const SizedBox(height: 8.0),
-          ListTile(
-            title:
-                _rangeStart != null
-                    ? Center(
-                      child: Text(
-                        _rangeStart == null
-                            ? "Start Date"
-                            : Datetime.format(_rangeStart!),
-                      ),
-                    )
-                    : Text(''),
-          ),
-          ListTile(
-            title:
-                _rangeEnd != null
-                    ? Center(
-                      child: Text(
-                        _rangeEnd == null
-                            ? "Start Date"
-                            : Datetime.format(_rangeEnd!),
-                      ),
-                    )
-                    : Text(''),
-          ),
+                },
+              ),
+              const SizedBox(height: 8.0),
+              ListTile(
+                title:
+                    _rangeStart != null
+                        ? Center(
+                          child: Text(
+                            _rangeStart == null
+                                ? "Start Date"
+                                : Datetime.format(_rangeStart!),
+                          ),
+                        )
+                        : Text(''),
+              ),
+              ListTile(
+                title:
+                    _rangeEnd != null
+                        ? Center(
+                          child: Text(
+                            _rangeEnd == null
+                                ? "Start Date"
+                                : Datetime.format(_rangeEnd!),
+                          ),
+                        )
+                        : Text(''),
+              ),
 
-          const SizedBox(height: 200),
-          AppButton(
-            text: 'Confirm Schedule',
-            onTap: () {
-              if (_rangeEnd == null || _rangeStart == null) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('Please Select Date')));
-              } else {
-                modalProvider.setRange(_rangeStart!, _rangeEnd!);
-                ''.pop(context);
-              }
-            },
+              const SizedBox(height: 150),
+              AppButton(
+                text: 'Confirm Schedule',
+                onTap: () {
+                  if (_rangeEnd == null || _rangeStart == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please Select Date')),
+                    );
+                  } else {
+                    modalProvider.setRange(_rangeStart!, _rangeEnd!);
+                    ''.pop(context);
+                  }
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

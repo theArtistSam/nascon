@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nascon_prep/configs/configs.dart';
+import 'package:nascon_prep/router/routes.dart';
 import 'package:nascon_prep/widgets/core/app_appbar.dart';
 import 'package:provider/provider.dart';
 part 'widgets/_body.dart';
